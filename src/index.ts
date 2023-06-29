@@ -18,18 +18,19 @@ app.get("/sendmail", (req: Request, res: Response) => {
       port: 465,
       secure: true,
       auth: {
-        user: "curific.care@gmail.com",
-        pass: "yjkmaddiomewqfzj",
+        user: "amitjoshi6180@gmail.com",
+        pass: "zthznllzlwezmjrf",
       },
     });
     var mailOptions = {
-      from: "curific.care@gmail.com",
+      from: "amitjoshi6180@gmail.com",
       to: data.email,
       subject: "Sending Email using Node.js",
       text: "hii this is the testing mode for using node js!",
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
+        console.log("error", error);
         return res.status(500).json({
           message: "email Id not found in server!",
           data: error,
