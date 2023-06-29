@@ -11,26 +11,24 @@ app.use(
 );
 app.get("/sendmail", (req: Request, res: Response) => {
   const data = req.body;
-  console.log("data", data);
-  if (data.email !== "") {
+  for (let i = 0; i < data.email.length; i++) {
     const transporter = nodemailer.createTransport({
       host: "smtp.googlemail.com",
       port: 465,
       secure: true,
       auth: {
-        user: "amitjoshi6180@gmail.com", // gmail ID : amitcentillion@gmail.com
-        pass: "zthznllzlwezmjrf", // password : vgoqxduaezxragjb
+        user: "amitjoshi6180@gmail.com", // amitcentillion@gmail.com
+        pass: "zthznllzlwezmjrf", //  vgoqxduaezxragjb
       },
     });
     var mailOptions = {
       from: "amitjoshi6180@gmail.com",
-      to: data.email,
+      to: data.email[i],
       subject: "Sending Email using Node.js",
       text: "hii this is the testing mode for using node js!",
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log("error", error);
         return res.status(500).json({
           message: "email Id not found in server!",
           data: error,
@@ -42,10 +40,6 @@ app.get("/sendmail", (req: Request, res: Response) => {
           emailData: info.response,
         });
       }
-    });
-  } else {
-    return res.status(400).json({
-      messga: "Email is required",
     });
   }
 });
