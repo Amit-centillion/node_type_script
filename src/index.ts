@@ -18,8 +18,8 @@ app.get("/sendmail", (req: Request, res: Response) => {
       port: 465,
       secure: true,
       auth: {
-        user: "amitjoshi6180@gmail.com",
-        pass: "zthznllzlwezmjrf",
+        user: "amitjoshi6180@gmail.com", // gmail ID : amitcentillion@gmail.com
+        pass: "zthznllzlwezmjrf", // password : vgoqxduaezxragjb
       },
     });
     var mailOptions = {
