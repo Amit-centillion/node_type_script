@@ -9,7 +9,7 @@ export default {
     },
     from: "amitjoshi6180@gmail.com",
     subject: "Sending Email using Node.js",
-    text: "hii this is the testing mode for using node js!",
+    text: "send mail using node js!  \u{1F60A}",
   },
   response: {
     MAIL_SEND_SUCCESSFULLY: "Mail send successfully.",
