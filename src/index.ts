@@ -1,6 +1,7 @@
 import express from "express";
 import nodemailer from "nodemailer";
 import { Request, Response } from "express";
+import config from "./config";
 const app = express();
 
 app.use(
@@ -13,29 +14,29 @@ app.get("/sendmail", (req: Request, res: Response) => {
   const data = req.body;
   for (let i = 0; i < data.email.length; i++) {
     const transporter = nodemailer.createTransport({
-      host: "smtp.googlemail.com",
-      port: 465,
-      secure: true,
+      host: config.mail.host,
+      port: config.mail.port,
+      secure: config.mail.secure,
       auth: {
-        user: "amitjoshi6180@gmail.com", // amitcentillion@gmail.com
-        pass: "zthznllzlwezmjrf", //  vgoqxduaezxragjb
+        user: config.mail.auth.user, // amitcentillion@gmail.com
+        pass: config.mail.auth.pass, //  vgoqxduaezxragjb
       },
     });
     var mailOptions = {
-      from: "amitjoshi6180@gmail.com",
+      from: config.mail.from,
       to: data.email[i],
-      subject: "Sending Email using Node.js",
-      text: "hii this is the testing mode for using node js!",
+      subject: config.mail.subject,
+      text: config.mail.text,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         return res.status(500).json({
-          message: "email Id not found in server!",
+          message: config.response.INTERNAL_ERRRO,
           data: error,
         });
       } else {
         return res.status(200).json({
-          message: "mail send successfully.",
+          message: config.response.MAIL_SEND_SUCCESSFULLY,
           data: data,
           emailData: info.response,
         });
