@@ -12,8 +12,8 @@ app.use(
 );
 app.get("/sendmail", (req: Request, res: Response) => {
   try {
-    const data = req.body;
-    for (let i = 0; i < data.email.length; i++) {
+    const data: any = req.body;
+    for (const emelemt of data.email) {
       const transporter = nodemailer.createTransport({
         host: config.mail.host,
         port: config.mail.port,
@@ -25,7 +25,7 @@ app.get("/sendmail", (req: Request, res: Response) => {
       });
       var mailOptions = {
         from: config.mail.from,
-        to: data.email[i],
+        to: emelemt,
         subject: config.mail.subject,
         text: config.mail.text,
       };
